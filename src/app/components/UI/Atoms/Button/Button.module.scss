@@ -1,0 +1,20 @@
+@use '../../../../styles/settings/' as variables;
+
+.button {
+    all: unset;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background: variables.$blue;
+    border-radius: 5px;
+    color: variables.$white;
+    height: 48px;
+    min-width: 224px;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 16px;
+
+}

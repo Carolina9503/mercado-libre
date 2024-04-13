@@ -1,0 +1,16 @@
+@use '../../../../styles/settings/' as variables;
+
+.headerBackground{
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    background-color: variables.$yellow;
+    width: 100%;
+    height: 60px;
+
+    & > img{
+        height: 34px;
+        width: 42px;
+    }
+}

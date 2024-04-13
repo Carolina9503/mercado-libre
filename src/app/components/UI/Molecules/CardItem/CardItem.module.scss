@@ -1,0 +1,39 @@
+@use "../../../../styles/settings/" as variables;
+
+.cardItem {
+  display: flex;
+  width: 100%;
+
+  & > img {
+    width: 180px;
+    height: 180px;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  &__left {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    &__body {
+      margin-left: 16px;
+      & > span {
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        font-size: 22px;
+        color: variables.$black;
+      }
+      & > p {
+        padding-top: 32px;
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        font-size: 16px;
+        color: variables.$black;
+      }
+    }
+    &__place {
+      font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+      font-size: 22px;
+      color: variables.$black;
+    }
+  }
+}
