@@ -1,7 +1,10 @@
-
+"use client";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import HeaderBackground from "./components/UI/Molecules/HeaderBackground/HeaderBackground";
+import Search from "./components/UI/Molecules/Search/Search";
+import { useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,9 +18,22 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [value, setvalue] = useState("Iphon");
+  const onClick = () => {
+    console.log("click");
+  };
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+      <HeaderBackground>
+        <Search
+          onSearch={setvalue}
+          onClick={onClick}
+          placeholder="Buscando productos, marcas y más ..."
+        ></Search>
+      </HeaderBackground>
+        {children}
+      </body>
     </html>
   );
 }

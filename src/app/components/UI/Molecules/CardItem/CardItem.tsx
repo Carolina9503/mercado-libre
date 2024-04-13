@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./CardItem.module.scss";
+import Image from "next/image";
+import shipping from "../../../../assets/ic_shipping.png";
 
 interface CardItemProps {
   image: string;
@@ -15,7 +17,12 @@ const CardItem = ({ image, price, description, place }: CardItemProps) => {
       <div className={styles.cardItem__left}>
         <div className={styles.cardItem__left__body}>
           <span>{price}</span>
-          <p>{description}</p>
+          {true && <Image src={shipping} alt="shipping" />}
+
+          <p className={styles.cardItem__left__body__description}>
+            {description}
+          </p>
+          <p>Completo unico!</p>
         </div>
         <span className={styles.cardItem__left__place}>{place}</span>
       </div>

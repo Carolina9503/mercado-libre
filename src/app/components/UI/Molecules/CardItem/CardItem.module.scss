@@ -3,12 +3,12 @@
 .cardItem {
   display: flex;
   width: 100%;
-
   & > img {
     width: 180px;
     height: 180px;
     border-radius: 4px;
     box-sizing: border-box;
+    margin: 16px;
   }
 
   &__left {
@@ -17,23 +17,32 @@
     display: flex;
     justify-content: space-between;
     &__body {
-      margin-left: 16px;
+      margin-top: 32px;
       & > span {
+        display: inline-block;
         font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
         font-size: 22px;
         color: variables.$black;
+        margin-right:5px;
       }
+
       & > p {
-        padding-top: 32px;
-        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-        font-size: 16px;
+        font-family: "Arial Narrow", sans-serif;
+        font-size: 18px;
         color: variables.$black;
+        font-weight: 600;
+      }
+      &__description {
+        padding-top: 32px;
       }
     }
     &__place {
-      font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-      font-size: 22px;
-      color: variables.$black;
+      font-family: "Arial Narrow", Arial, sans-serif;
+      font-size: 12px;
+      color: variables.$grey;
+      margin-top: 32px;
+      margin-right: 12em;
+      font-weight: 600;
     }
   }
 }
