@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Button from "../../UI/Atoms/Button/Button";
 import styles from "./Details.module.scss";
+import { currencyFormatMoviments } from "@/app/functions/formatAmout";
 
 const Details = () => {
   const [productDetails, setProductDetails] = useState<GetProductDetails>();
@@ -44,7 +45,9 @@ const Details = () => {
                     className={styles.cardItem__main__left__body__price__amount}
                   >
                     {productDetails?.itemDetail.price.currency}
-                    {productDetails?.itemDetail.price.amount ?? ""}
+                    {currencyFormatMoviments(
+                      parseInt(productDetails?.itemDetail.price.amount)
+                    ) ?? ""}
                   </span>
                   <span
                     className={

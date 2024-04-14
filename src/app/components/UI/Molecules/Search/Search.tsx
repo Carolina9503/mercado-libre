@@ -8,7 +8,6 @@ import Image from 'next/image';
 interface SearchProps {
   onSearch: (searchValue: string) => void;
   placeholder?: string;
-  helperText?: string;
   onClick?: () => void;
   value?: string;
 }
@@ -24,6 +23,7 @@ const Search = ({ onSearch, placeholder, onClick, value }: SearchProps) => {
         className={styles.search__input}
         onChange={handleSearch}
         placeholder={placeholder}
+        value={value}
       />
 
       <button className={styles.search__button} onClick={onClick}>
