@@ -9,7 +9,6 @@ interface BreadcrumbsProps {
 }
 
 const BreadCrumbs = ({ items }: BreadcrumbsProps) => {
-  console.log('items', items)
   return (
     <ul className={styles.breadcrumbs}>
       {items &&

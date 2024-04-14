@@ -1,40 +1,75 @@
-import React from "react";
-import styles from "./Details.module.scss";
-import Image from "next/image";
+"use client";
+import { GetProductDetails } from "@/app/models/productDetail";
+import axios from "axios";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import Button from "../../UI/Atoms/Button/Button";
+import styles from "./Details.module.scss";
 
-interface CardItemProps {
-  detailItem: {
-    image: string;
-    price: string;
-    title: string;
-    description: string;
-  };
-}
+const Details = () => {
+  const [productDetails, setProductDetails] = useState<GetProductDetails>();
 
-const Details = ({ detailItem }: CardItemProps) => {
+  const params = useParams();
+  useEffect(() => {
+    axios
+      .get(`http://localhost:53000/api/items/${params.id.slice(3)}`)
+      .then((res) => {
+        setProductDetails(res.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
   return (
     <div className={styles.cardItem}>
-      <div className={styles.cardItem__main}>
-        <img src={detailItem.image} alt="Item" />
-        <div className={styles.cardItem__main__left}>
-          <div className={styles.cardItem__main__left__body}>
-            <p className={styles.cardItem__main__left__body__status}>Nuevo - 234 vendidos</p>
-            <p className={styles.cardItem__main__left__body__title}>
-              {detailItem.title}
-            </p>
-            <div className={styles.cardItem__main__left__body__price}>
-                <span className={styles.cardItem__main__left__body__price__amount}>$ {detailItem.price}</span>
-                <span className={styles.cardItem__main__left__body__price__decimal}>00</span>
+      {(productDetails && (
+        <>
+          <div className={styles.cardItem__main}>
+            <img
+              src={productDetails?.itemDetail.picture}
+              alt="Imagen de Item no encontrado"
+            />
+            <div className={styles.cardItem__main__left}>
+              <div className={styles.cardItem__main__left__body}>
+                <p className={styles.cardItem__main__left__body__status}>
+                  {productDetails?.itemDetail.sold_quantity ?? ""}
+                </p>
+                <p className={styles.cardItem__main__left__body__title}>
+                  {productDetails?.itemDetail.title
+                    ? productDetails?.itemDetail.title
+                    : ""}
+                </p>
+                <div className={styles.cardItem__main__left__body__price}>
+                  <span
+                    className={styles.cardItem__main__left__body__price__amount}
+                  >
+                    {productDetails?.itemDetail.price.currency}
+                    {productDetails?.itemDetail.price.amount ?? ""}
+                  </span>
+                  <span
+                    className={
+                      styles.cardItem__main__left__body__price__decimal
+                    }
+                  >
+                    {productDetails?.itemDetail.price.decimals
+                      ? productDetails?.itemDetail.price.decimals
+                      : "00"}
+                  </span>
+                </div>
+                <Button text="Comprar" />
+              </div>
             </div>
-            <Button text="Comprar" />
           </div>
-        </div>
-      </div>
-      <div className={styles.cardItem__description}>
-        <small>Descripción del producto</small>
-        <p>{detailItem.description}</p>
-      </div>
+          <div className={styles.cardItem__description}>
+            <small>Descripción del producto</small>
+            <p>
+              {productDetails?.itemDetail.description
+                ? productDetails?.itemDetail.description
+                : ""}
+            </p>
+          </div>
+        </>
+      )) || <div>Loading...</div>}
     </div>
   );
 };

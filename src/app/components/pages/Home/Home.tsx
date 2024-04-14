@@ -13,7 +13,6 @@ const Home = () => {
   const searchParams = useSearchParams();
 
   const search = searchParams.get("search");
-    console.log('search', search)
   useEffect(() => {
     axios
       .get(`http://localhost:53000/api/items?q=${search}`)
@@ -27,13 +26,12 @@ const Home = () => {
 
   return (
     <>
-    <BreadCrumbs items={product?.categories!}/>
-      {product && product.items.length > 0 && (
+      <BreadCrumbs items={product?.categories!} />
+      {(product && product.items.length > 0 && (
         <div className={styles.mainContainer}>
           {product.items.map((item, id) => (
-            <>
+            <div key={randomKey("row-" + id)}>
               <CardItem
-                key={randomKey("row-" + id)}
                 id={item.id}
                 image={item.picture}
                 price={item.price.amount}
@@ -42,10 +40,10 @@ const Home = () => {
                 isFreeShipping={item.free_shipping}
               />
               <hr className={styles.mainContainer__hr} />
-            </>
+            </div>
           ))}
         </div>
-      ) || <div className={styles.content}>No se encontraron productos disponibles para esta Categoria</div>}
+      )) || <div className={styles.content}>Loading.......</div>}
     </>
   );
 };
