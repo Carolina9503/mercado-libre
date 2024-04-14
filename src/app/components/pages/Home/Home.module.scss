@@ -4,8 +4,8 @@
   background-color: variables.$white;
   margin-right: 8em;
   margin-left: 8em;
-  border-radius:4px;
-  margin-top :32px;
+  border-radius: 4px;
+  margin-top: 32px;
   margin-bottom: 64px;
 
   &__hr {
@@ -13,4 +13,10 @@
     opacity: 0.1;
     border-color: variables.$light-grey;
   }
+}
+
+.content {
+  font-family: "Arial Narrow", Arial, sans-serif;
+  font-size: 18px;
+  color: variables.$grey;
 }

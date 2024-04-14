@@ -1,73 +1,52 @@
 "use client";
-import RootLayout from "@/app/layout";
-import React, { useState } from "react";
-import HeaderBackground from "../../UI/Molecules/HeaderBackground/HeaderBackground";
-import Search from "../../UI/Molecules/Search/Search";
+import { randomKey } from "@/app/functions/randomKey";
+import { GetProduct } from "@/app/models/product";
+import axios from "axios";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import BreadCrumbs from "../../UI/Molecules/BreadCrumbs/BreadCrumbs";
 import CardItem from "../../UI/Molecules/CardItem/CardItem";
 import styles from "./Home.module.scss";
 
 const Home = () => {
-  const dataLocal = [
-    {
-      id: 1,
-      image: "https://i.blogs.es/d69481/iphone-14-00-01/650_1200.jpg",
-      price: "$ 1.980",
-      description: "Apple Touch 5g 16gb Negro igual a Nuevo",
-      place: "Capital Federal",
-    },
-    {
-      id: 2,
-      image:
-        "https://mac-center.com/cdn/shop/files/iPhone_15_Pro_Black_Titanium_PDP_Image_Position-1__COES_813eeda0-bba4-4a15-a89f-00e902760fda_823x.jpg?v=1700298683",
-      price: "$ 1.980",
-      description: "Apple Touch 5g 16gb Negro igual a Nuevo",
-      place: "Capital Federal",
-    },
-    {
-      id: 3,
-      image: "https://i.blogs.es/d69481/iphone-14-00-01/650_1200.jpg",
-      price: "$ 1.980",
-      description: "Apple Touch 5g 16gb Negro igual a Nuevo",
-      place: "Capital Federal",
-    },
-    {
-      id: 4,
-      image:
-        "https://mac-center.com/cdn/shop/files/iPhone_15_Pro_Black_Titanium_PDP_Image_Position-1__COES_813eeda0-bba4-4a15-a89f-00e902760fda_823x.jpg?v=1700298683",
-      price: "$ 1.980",
-      description: "Apple Touch 5g 16gb Negro igual a Nuevo",
-      place: "Capital Federal",
-    },
-    {
-      id: 5,
-      image:
-        "https://mac-center.com/cdn/shop/files/iPhone_15_Pro_Black_Titanium_PDP_Image_Position-1__COES_813eeda0-bba4-4a15-a89f-00e902760fda_823x.jpg?v=1700298683",
-      price: "$ 1.980",
-      description: "Apple Touch 5g 16gb Negro igual a Nuevo",
-      place: "Capital Federal",
-    },
-  ];
-  const [value, setvalue] = useState("Iphon");
-  const onClick = () => {
-    console.log("click");
-  };
+  const [product, setProduct] = useState<GetProduct>();
+  const searchParams = useSearchParams();
+
+  const search = searchParams.get("search");
+    console.log('search', search)
+  useEffect(() => {
+    axios
+      .get(`http://localhost:53000/api/items?q=${search}`)
+      .then((res) => {
+        setProduct(res.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
+
   return (
-    <RootLayout>
-      <div className={styles.mainContainer}>
-        {dataLocal.map((item) => (
-          <>
-            <CardItem
-              key={item.id}
-              image={item.image}
-              price={item.price}
-              description={item.description}
-              place={item.place}
-            />
-            <hr className={styles.mainContainer__hr} />
-          </>
-        ))}
-      </div>
-    </RootLayout>
+    <>
+    <BreadCrumbs items={product?.categories!}/>
+      {product && product.items.length > 0 && (
+        <div className={styles.mainContainer}>
+          {product.items.map((item, id) => (
+            <>
+              <CardItem
+                key={randomKey("row-" + id)}
+                id={item.id}
+                image={item.picture}
+                price={item.price.amount}
+                description={item.title}
+                place={"Capital Federal"}
+                isFreeShipping={item.free_shipping}
+              />
+              <hr className={styles.mainContainer__hr} />
+            </>
+          ))}
+        </div>
+      ) || <div className={styles.content}>No se encontraron productos disponibles para esta Categoria</div>}
+    </>
   );
 };
 

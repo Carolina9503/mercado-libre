@@ -15,7 +15,6 @@ interface SearchProps {
 
 const Search = ({ onSearch, placeholder, onClick, value }: SearchProps) => {
   const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log('event', event)
     onSearch(event.target.value);
   };
   return (

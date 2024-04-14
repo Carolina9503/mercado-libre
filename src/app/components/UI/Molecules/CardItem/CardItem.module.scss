@@ -10,10 +10,10 @@
     box-sizing: border-box;
     margin: 16px;
   }
+  
 
   &__left {
     width: 100%;
-
     display: flex;
     justify-content: space-between;
     &__body {
@@ -33,7 +33,9 @@
         font-weight: 600;
       }
       &__description {
+        width: 70%;
         padding-top: 32px;
+        white-space: wrap;
       }
     }
     &__place {
@@ -43,6 +45,7 @@
       margin-top: 32px;
       margin-right: 12em;
       font-weight: 600;
+      white-space:nowrap;
     }
   }
 }
