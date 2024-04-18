@@ -13,6 +13,8 @@ const Home = () => {
   const searchParams = useSearchParams();
 
   const search = searchParams.get("search");
+
+
   useEffect(() => {
     axios
       .get(`http://localhost:53000/api/items?q=${search}`)
@@ -22,7 +24,7 @@ const Home = () => {
       .catch(function (error) {
         console.log(error);
       });
-  }, []);
+  }, [search]);
 
   return (
     <>
@@ -36,7 +38,7 @@ const Home = () => {
                 image={item.picture}
                 price={item.price.amount}
                 description={item.title}
-                place={"Capital Federal"}
+                place={item.seller}
                 isFreeShipping={item.free_shipping}
               />
               <hr className={styles.mainContainer__hr} />

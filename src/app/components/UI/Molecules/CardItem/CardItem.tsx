@@ -27,7 +27,7 @@ const CardItem = ({
     router.push(`/items/:${id}`);
   };
   return (
-    <div className={styles.cardItem} onClick={() => handleCardItemClick()}>
+    <main className={styles.cardItem} onClick={() => handleCardItemClick()}>
       <img src={image} alt="Item" />
       <div className={styles.cardItem__left}>
         <div className={styles.cardItem__left__body}>
@@ -38,9 +38,9 @@ const CardItem = ({
             {description}
           </p>
         </div>
-        <span className={styles.cardItem__left__place}>{place}</span>
+        <span className={styles.cardItem__left__place}>{place ?? ""}</span>
       </div>
-    </div>
+    </main>
   );
 };
 

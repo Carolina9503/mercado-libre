@@ -1,9 +1,12 @@
-import React from 'react'
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Search Page",
+  description: "Prueba mercado libre"
+};
 
 const page = () => {
-  return (
-    <div></div>
-  )
-}
+  return null;
+};
 
-export default page
+export default page;

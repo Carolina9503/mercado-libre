@@ -1,14 +1,12 @@
-
-import React, { ChangeEvent } from "react";
-import styles from "./Search.module.scss";
+import Image from "next/image";
+import { ChangeEvent, FormEvent } from "react";
 import search from "../../../../assets/ic_Search.png";
-import Image from 'next/image';
-
+import styles from "./Search.module.scss";
 
 interface SearchProps {
   onSearch: (searchValue: string) => void;
   placeholder?: string;
-  onClick?: () => void;
+  onClick?: (event: FormEvent) => void;
   value?: string;
 }
 
@@ -17,7 +15,7 @@ const Search = ({ onSearch, placeholder, onClick, value }: SearchProps) => {
     onSearch(event.target.value);
   };
   return (
-    <div className={styles.search}>
+    <form className={styles.search} onSubmit={onClick}>
       <input
         type="text"
         className={styles.search__input}
@@ -26,10 +24,10 @@ const Search = ({ onSearch, placeholder, onClick, value }: SearchProps) => {
         value={value}
       />
 
-      <button className={styles.search__button} onClick={onClick}>
-        <Image src={search} alt='search'/>
+      <button type="submit" className={styles.search__button}>
+        <Image src={search} alt="search" />
       </button>
-    </div>
+    </form>
   );
 };
 
